@@ -1,0 +1,86 @@
+@import "./variables";
+
+@mixin flex($direction) {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: $direction;
+}
+
+.header{
+    height: 5rem;
+    background-color: $headerclr;
+    color: $textclr;
+    @include flex(row);
+    align-items: center;
+    justify-content: space-around;
+
+    &--logo{
+        @include flex(column);
+        justify-content: center;
+        align-items: center;
+        gap: .5em;
+
+        &__name{
+            position: relative;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: .05em;
+
+            &::after{
+                content: "";
+                position: absolute;
+                top: -.1em;
+                left: 0;
+                background-color: $logoclr;
+                height: .125rem;
+                width: 100%;
+            }
+        }
+
+        .fa-shop{
+            color: $logoclr;
+            font-size: 1.125rem;
+        }
+    }
+    &--searchfield{
+        background-color: $logoclr;
+        height: 2rem;
+        width: 25rem;
+        padding-right: .5em;
+        @include flex(row);
+
+        input{
+            height: 100%;
+            width: 90%;
+            margin-right: .5em;
+            text-indent: 1em;
+            outline-color: $logoclr;
+        }
+
+        .fa-magnifying-glass{
+            width: 10%;
+            @include flex(row);
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+    }
+    &--login__link{
+        font-weight: 400;
+        letter-spacing: .1em;
+        font-size: 1.125rem;
+    }
+
+    &--cart{
+        @include flex(row);
+        align-items: flex-end;
+
+        .fa-cart-arrow-down{
+            font-size: 2rem;
+            color: $logoclr;
+        }
+        p{
+            font-weight: 600;
+        }
+    }
+}

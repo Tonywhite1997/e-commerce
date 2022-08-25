@@ -1,0 +1,45 @@
+@import "./variables";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,300&display=swap');
+
+@mixin flex($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.main{
+    @include flex(row);
+
+    &--carousel{
+        position: relative;
+        height: 15rem;
+        // border: 1px solid red;
+        font-family: 'Poppins', sans-serif;
+        width: 100%;
+        @include flex(row);
+        align-items: center;
+
+        h1{
+            text-align: center;
+            color: white;
+            width: 100%;
+            padding: 0 1.5em;
+        }
+
+        .fa-angle-left{
+            color: white;
+            position: absolute;
+            left: .2em;
+            font-size: 4rem;
+            cursor: pointer;
+        }
+
+        .fa-angle-right{
+            color: white;
+            position: absolute;
+            font-size: 4rem;
+            right: .2em;
+            cursor: pointer;
+        }
+    }
+}
