@@ -12,18 +12,21 @@
 
     &--carousel{
         position: relative;
-        height: 15rem;
+        margin-top: 5em;
+        height: 20rem;
         // border: 1px solid red;
         font-family: 'Poppins', sans-serif;
         width: 100%;
         @include flex(row);
         align-items: center;
+        cursor: pointer;
 
         h1{
             text-align: center;
             color: white;
             width: 100%;
             padding: 0 1.5em;
+            font-weight: 500;
         }
 
         .fa-angle-left{
@@ -31,7 +34,6 @@
             position: absolute;
             left: .2em;
             font-size: 4rem;
-            cursor: pointer;
         }
 
         .fa-angle-right{
@@ -39,7 +41,6 @@
             position: absolute;
             font-size: 4rem;
             right: .2em;
-            cursor: pointer;
         }
     }
 }

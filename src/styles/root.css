@@ -3,6 +3,9 @@
   height: 5rem;
   background-color: #232423;
   color: #ffffff;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -153,7 +156,8 @@
 
 .main--carousel {
   position: relative;
-  height: 15rem;
+  margin-top: 5em;
+  height: 20rem;
   font-family: 'Poppins', sans-serif;
   width: 100%;
   display: -webkit-box;
@@ -168,6 +172,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
 }
 
 .main--carousel h1 {
@@ -175,6 +180,7 @@
   color: white;
   width: 100%;
   padding: 0 1.5em;
+  font-weight: 500;
 }
 
 .main--carousel .fa-angle-left {
@@ -182,7 +188,6 @@
   position: absolute;
   left: .2em;
   font-size: 4rem;
-  cursor: pointer;
 }
 
 .main--carousel .fa-angle-right {
@@ -190,7 +195,6 @@
   position: absolute;
   font-size: 4rem;
   right: .2em;
-  cursor: pointer;
 }
 
 * {
@@ -203,5 +207,6 @@
 body {
   font-size: 1rem;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: #eaeaea;
 }
 /*# sourceMappingURL=root.css.map */

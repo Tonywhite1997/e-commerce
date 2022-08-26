@@ -36,17 +36,17 @@ function Carousel() {
     return () => {
       clearInterval(interval);
     };
-  });
+  }, [imageIndex, images.length]);
 
   const style = {
     backgroundImage: `linear-gradient(
-    rgba(0,0,0, .8),
     rgba(0,0,0, .5),
-    rgba(0,0,0, .3)),
+    rgba(0,0,0, .5),
+    rgba(0,0,0, .5)),
     url(${images[imageIndex] && images[imageIndex].category})`,
-    backgroundPosition: "center",
+    backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "100% auto",
   };
 
   function nextImage() {

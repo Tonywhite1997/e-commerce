@@ -10,6 +10,9 @@
     height: 5rem;
     background-color: $headerclr;
     color: $textclr;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
     @include flex(row);
     align-items: center;
     justify-content: space-around;
