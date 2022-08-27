@@ -8,18 +8,20 @@
 }
 
 .main{
-    @include flex(row);
+    position: relative;
+    padding-top: 5em;
+    padding-bottom: 2em;
+    overflow-x: hidden;
 
     &--carousel{
         position: relative;
-        margin-top: 5em;
         height: 20rem;
-        // border: 1px solid red;
         font-family: 'Poppins', sans-serif;
         width: 100%;
         @include flex(row);
         align-items: center;
         cursor: pointer;
+        margin-bottom: 1em;
 
         h1{
             text-align: center;
@@ -43,4 +45,87 @@
             right: .2em;
         }
     }
+    .fa-spinner{
+        position: absolute;
+        left: 50%;
+        color: $logoclr;
+        font-size: 3rem;
+        transform: translateX(-50%);
+        animation-name: spinner;
+        animation-duration: 4s;
+    }
+    &--product__container{
+        // border: 1px solid red;
+        font-family: 'Poppins', sans-serif;
+        display: grid;
+        grid-template-columns: repeat(4, 300px);
+        gap: 2em;
+        place-content: center;
+
+        .product{
+            position: relative;
+            padding: .5em .5em;
+            background-color: white;
+
+
+            img{
+                height: 200px;
+                width: 100%;
+            }
+
+            .category{
+                position: absolute;
+                top: 0;
+                background-color: $logoclr;
+                color: white;
+                padding: .5em 1em;
+                margin-top: .5em;
+                margin-bottom: .5em;
+                font-size: .6rem;
+            }
+
+            .name{
+                margin-bottom: .5em;
+            }
+
+            .description--label{
+                color: $logoclr;
+            }
+
+            .description{
+                font-size: .7rem;
+                margin-bottom: 2em
+            }
+
+            .product--price__div{
+                @include flex(row);
+                justify-content: space-between;
+
+                .price{
+                    font-weight: 500;
+                }
+
+                .add--to--cart{
+                    border: none;
+                    background-color: $logoclr;
+                    color: white;
+                    padding: .5em .5em;
+                    font-size: .7rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: All 500ms ease-in-out;
+
+                    &:hover{
+                        background-color: black;
+                        transform: scale(1.05);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes spinner {
+    from{transform: rotate(0deg);}
+    to{transform: rotate(360deg);}
 }

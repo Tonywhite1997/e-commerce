@@ -143,20 +143,14 @@
 }
 
 .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  position: relative;
+  padding-top: 5em;
+  padding-bottom: 2em;
+  overflow-x: hidden;
 }
 
 .main--carousel {
   position: relative;
-  margin-top: 5em;
   height: 20rem;
   font-family: 'Poppins', sans-serif;
   width: 100%;
@@ -173,6 +167,7 @@
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
+  margin-bottom: 1em;
 }
 
 .main--carousel h1 {
@@ -195,6 +190,123 @@
   position: absolute;
   font-size: 4rem;
   right: .2em;
+}
+
+.main .fa-spinner {
+  position: absolute;
+  left: 50%;
+  color: #a013f0;
+  font-size: 3rem;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-animation-name: spinner;
+          animation-name: spinner;
+  -webkit-animation-duration: 4s;
+          animation-duration: 4s;
+}
+
+.main--product__container {
+  font-family: 'Poppins', sans-serif;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (300px)[4];
+      grid-template-columns: repeat(4, 300px);
+  gap: 2em;
+  place-content: center;
+}
+
+.main--product__container .product {
+  position: relative;
+  padding: .5em .5em;
+  background-color: white;
+}
+
+.main--product__container .product img {
+  height: 200px;
+  width: 100%;
+}
+
+.main--product__container .product .category {
+  position: absolute;
+  top: 0;
+  background-color: #a013f0;
+  color: white;
+  padding: .5em 1em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  font-size: .6rem;
+}
+
+.main--product__container .product .name {
+  margin-bottom: .5em;
+}
+
+.main--product__container .product .description--label {
+  color: #a013f0;
+}
+
+.main--product__container .product .description {
+  font-size: .7rem;
+  margin-bottom: 2em;
+}
+
+.main--product__container .product .product--price__div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.main--product__container .product .product--price__div .price {
+  font-weight: 500;
+}
+
+.main--product__container .product .product--price__div .add--to--cart {
+  border: none;
+  background-color: #a013f0;
+  color: white;
+  padding: .5em .5em;
+  font-size: .7rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-transition: All 500ms ease-in-out;
+  transition: All 500ms ease-in-out;
+}
+
+.main--product__container .product .product--price__div .add--to--cart:hover {
+  background-color: black;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+@-webkit-keyframes spinner {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 
 * {
