@@ -4,7 +4,7 @@ function Logo() {
   return (
     <div className="header--logo">
       <h3 className="header--logo__name">ShoppeR</h3>
-      <i className="fa-solid fa-shop"></i>
+      {/* <i className="fa-solid fa-shop"></i> */}
     </div>
   );
 }

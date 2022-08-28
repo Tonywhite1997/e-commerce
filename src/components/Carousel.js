@@ -8,15 +8,15 @@ import { useEffect, useState } from "react";
 function Carousel() {
   const [imageIndex, setImageIndex] = useState(0);
   const images = [
-    { category: Shoes, text: "Get the trending shoes at your door step" },
-    { category: Clothes, text: "Get your clothes delivered at your door step" },
+    { category: Shoes, text: "Quality Shoes" },
+    { category: Clothes, text: "Refresh your Wardrope" },
     {
       category: Headphone,
-      text: "Are you a music or game lover? Shop for headphones.",
+      text: "Get quality sound",
     },
     {
       category: Sofa,
-      text: "Designing your new home? check out some of our best Sofa",
+      text: "Redesign your home",
     },
   ];
 
