@@ -1,9 +1,12 @@
 import React from "react";
 import Header from "./components/Header";
+import Footer from "./Footer";
 import Carousel from "./components/Carousel";
+import Categories from "./components/Categories";
 import { useState, useEffect, useRef } from "react";
 import commerce from "./lib/commerce";
 import Products from "./components/Products";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -57,7 +60,9 @@ function App() {
     if (!searchQuery) {
       return;
     }
+    setCurrentCategory("All");
     setIsSearching(true);
+    setIsSorting(false);
     // console.log(categoryRef.current);
     if (categoryRef.current !== "All") {
       setSearchProductArray(
@@ -75,8 +80,42 @@ function App() {
     setSearchQuery("");
     searchInputRef.current = searchQuery;
   }
-  //   console.log(isSearching);
-  //   console.log(searchProductArray);
+
+  const [isSorting, setIsSorting] = useState(false);
+  const [sortArray, setSortArray] = useState([]);
+
+  const [currentCategory, setCurrentCategory] = useState("All");
+
+  function navigateCategory(value) {
+    setCurrentCategory(value);
+    setIsSearching(false);
+    setIsSorting(true);
+    setSortArray(
+      products.filter((product) => {
+        if (product.categories[0].name === value) {
+          return product;
+        }
+      })
+    );
+  }
+
+  function falsifySorting() {
+    setCurrentCategory("All");
+    setIsSorting(false);
+    setIsSearching(false);
+  }
+
+  function returnFromSearch() {
+    setIsSearching(false);
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   return (
     <>
@@ -86,17 +125,43 @@ function App() {
         handleSearchInput={handleSearchInput}
         performProductSearch={performProductSearch}
       />
+
       <main className="main">
         <Carousel />
+        <Categories
+          navigateCategory={navigateCategory}
+          isLoading={isLoading}
+          falsifySorting={falsifySorting}
+        />
         {isSearching && !isLoading && (
           <h3 className="search--result__text">{`${searchProductArray.length} result(s) found for ${searchInputRef.current} in this category`}</h3>
         )}
+        {isSearching && !isLoading && (
+          <button className="go--back__button" onClick={returnFromSearch}>
+            Back
+          </button>
+        )}
+        {!isLoading && <p className="current--category">{currentCategory}</p>}
         {isLoading && <i className="fa-solid fa-spinner"></i>}
-        {!isLoading && !isSearching && <Products products={products} />}
-        {!isLoading && isSearching && (
+        {!isLoading && !isSearching && !isSorting && (
+          <Products products={products} />
+        )}
+        {!isLoading && isSearching && !isSorting && (
           <Products products={searchProductArray} />
         )}
+        {!isLoading && isSorting && !isSearching && (
+          <Products products={sortArray} />
+        )}
       </main>
+
+      <div className="go--up__div" onClick={scrollToTop}>
+        <div className="go--up__button">
+          <a href="#">
+            <i className="fa-solid fa-arrow-up"></i>
+          </a>
+        </div>
+      </div>
+      <Footer />
     </>
   );
 }

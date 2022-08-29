@@ -68,6 +68,7 @@
         font-weight: 400;
         letter-spacing: .1em;
         font-size: 1.125rem;
+        letter-spacing: -0.1px;
         cursor: pointer;
     }
 
@@ -98,7 +99,7 @@
             p{
                 font-size: 1.5rem;
                 letter-spacing: -.1em;
-                color: white;
+                color: rgb(255, 255, 255);
                 font-weight: 600;
             }
         }

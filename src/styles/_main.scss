@@ -12,6 +12,10 @@
     padding-top: 5em;
     padding-bottom: 2em;
     overflow-x: hidden;
+    // border: 1px solid green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     &--carousel{
         position: relative;
@@ -21,7 +25,6 @@
         @include flex(row);
         align-items: center;
         cursor: pointer;
-        margin-bottom: 2em;
 
         h1{
             text-align: center;
@@ -32,33 +35,95 @@
         }
 
         .fa-angle-left{
-            color: white;
+            color: $textclr;
             position: absolute;
             left: .2em;
             font-size: 4rem;
         }
 
         .fa-angle-right{
-            color: white;
+            color: $textclr;
             position: absolute;
             font-size: 4rem;
             right: .2em;
         }
     }
+    &--categories__link{
+        background-color: $headerclr;
+        color: rgb(228, 225, 225);
+        height: 6rem;
+        width: 100%;
+        margin-bottom: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3{
+            margin-top: .5em;
+            color: rgb(216, 214, 214);
+        }
+
+        .category--container{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1em;
+
+            li{
+                list-style: none;
+                font-weight: 600;
+                font-size: .9rem;
+                background-color: $logoclr;
+                padding: .2em .5em;
+                cursor: pointer;
+                transition: all 500ms ease-in-out;
+
+                &:hover{
+                    color: green;
+                    background-color: white;
+                }
+            }
+        }
+    }
+
+    .current--category{
+        width: 93%;
+        font-size: 1.25rem;
+        text-align: left;
+        // margin-left: 2.5em;
+        margin-bottom: .5em;
+    }
+
     .search--result__text{
         font-size: 1.5rem;
-        margin-bottom: 1em;
+        // margin-bottom: .2em;
         color: rgba(black, .8);
         text-align: center;
     }
+    .go--back__button{
+        margin-bottom: 2em;
+        margin-top: 1em;
+        padding: .5em 1em;
+        background-color: green;
+        color: white;
+        font-weight: 600;
+        border: none;
+        transition: all 500ms ease-in-out;
+
+        &:hover{
+            background-color: black;
+        }
+
+    }
     .fa-spinner{
-        position: absolute;
         left: 50%;
         color: $logoclr;
         font-size: 3rem;
         transform: translateX(-50%);
         animation-name: spinner;
         animation-duration: 4s;
+        animation-iteration-count: infinite;
     }
     &--product__container{
         // border: 1px solid red;
@@ -72,11 +137,18 @@
             position: relative;
             padding: .5em .5em;
             background-color: white;
+            display: flex;
+            flex-direction: column;
 
-
-            img{
-                height: 200px;
+            .image--div{
                 width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    height: 200px;
+                    width: 80%;
+                }
             }
 
             .category{

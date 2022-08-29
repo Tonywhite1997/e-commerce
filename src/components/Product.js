@@ -3,7 +3,9 @@ import React from "react";
 function Product({ url, name, description, price, category }) {
   return (
     <div className="product">
-      <img src={url} />
+      <div className="image--div">
+        <img alt={url} src={url} />
+      </div>
       <h4 className="category">{category}</h4>
       <h4 className="name">{name}</h4>
       <h5 className="description--label">Description</h5>

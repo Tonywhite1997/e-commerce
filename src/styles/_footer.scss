@@ -1,0 +1,49 @@
+@import "./variables";
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    background-color: $headerclr;
+    color: green;
+    padding: .5em 1em;
+
+    h4{
+        margin-top: 1em;
+        font-size: 1.2rem;
+    }
+    h3{
+        font-size: .9rem;
+    }
+
+    small{
+        margin-bottom: 1em;
+    }
+
+    .partnership--div{
+        display: flex;
+        width: 50%;
+        justify-content: space-around;
+
+        i{
+            color: rgb(185, 181, 181);
+        }
+
+        .partner{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+}
+
+@media screen and (max-width:800px) {
+    .footer{
+        .partnership--div{
+            width: 80%;
+        }
+    }
+}
