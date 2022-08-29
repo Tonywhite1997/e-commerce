@@ -52,7 +52,6 @@ function App() {
   function handleSearchInput({ target }) {
     setSearchQuery(target.value);
   }
-  //   console.log(productsBasedOnCategoryArray);
 
   const searchInputRef = useRef();
 
@@ -63,7 +62,6 @@ function App() {
     setCurrentCategory("All");
     setIsSearching(true);
     setIsSorting(false);
-    // console.log(categoryRef.current);
     if (categoryRef.current !== "All") {
       setSearchProductArray(
         productsBasedOnCategoryArray.filter(({ name }) => {
@@ -134,14 +132,16 @@ function App() {
           falsifySorting={falsifySorting}
         />
         {isSearching && !isLoading && (
-          <h3 className="search--result__text">{`${searchProductArray.length} result(s) found for ${searchInputRef.current} in this category`}</h3>
+          <h3 className="search--result__text">{`${searchProductArray.length} result(s) found for "${searchInputRef.current}" in this category`}</h3>
         )}
         {isSearching && !isLoading && (
           <button className="go--back__button" onClick={returnFromSearch}>
             Back
           </button>
         )}
-        {!isLoading && <p className="current--category">{currentCategory}</p>}
+        {!isLoading && (
+          <p className="current--category">Category- {currentCategory}</p>
+        )}
         {isLoading && <i className="fa-solid fa-spinner"></i>}
         {!isLoading && !isSearching && !isSorting && (
           <Products products={products} />

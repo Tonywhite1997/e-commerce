@@ -24,8 +24,9 @@
 
     .partnership--div{
         display: flex;
-        width: 50%;
-        justify-content: space-around;
+        width: 100%;
+        justify-content: center;
+        gap: 1em;
 
         i{
             color: rgb(185, 181, 181);

@@ -29,7 +29,7 @@ function Carousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       changeImageIndex();
-    }, 30000);
+    }, 10000);
     if (imageIndex === images.length) {
       setImageIndex(0);
     }
