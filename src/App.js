@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
-import Footer from "./Footer";
+import Footer from "./components/Footer";
 import Carousel from "./components/Carousel";
 import Categories from "./components/Categories";
 import { useState, useEffect, useRef } from "react";
@@ -156,7 +156,7 @@ function App() {
 
       <div className="go--up__div" onClick={scrollToTop}>
         <div className="go--up__button">
-          <a href="#">
+          <a>
             <i className="fa-solid fa-arrow-up"></i>
           </a>
         </div>

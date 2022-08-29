@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from "./Logo";
 
 function Footer() {
   return (
@@ -23,6 +24,9 @@ function Footer() {
         </div>
       </div>
       <small>Copyright. All rights reserved. Developed by Tony.</small>
+      <div className="logo--div">
+        <Logo />
+      </div>
     </footer>
   );
 }

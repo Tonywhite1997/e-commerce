@@ -46,6 +46,7 @@
 .header--logo__name {
   position: relative;
   font-weight: 600;
+  color: #c6c5c5;
   font-size: 1rem;
   letter-spacing: .05em;
 }
@@ -467,7 +468,7 @@
   gap: 1em;
   background-color: #232423;
   color: green;
-  padding: .5em 1em;
+  padding: 1em 1em;
 }
 
 .footer h4 {
@@ -508,6 +509,20 @@
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
+}
+
+.footer .logo--div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.footer .logo--div h3 {
+  font-size: 1.125rem;
 }
 
 @media screen and (max-width: 800px) {
