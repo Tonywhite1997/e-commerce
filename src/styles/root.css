@@ -41,6 +41,7 @@
       -ms-flex-align: center;
           align-items: center;
   gap: .5em;
+  color: transparent;
 }
 
 .header--logo__name {
@@ -132,6 +133,7 @@
       -ms-flex-align: end;
           align-items: flex-end;
   cursor: pointer;
+  color: transparent;
 }
 
 .header--cart .fa-cart-arrow-down {
@@ -531,6 +533,11 @@
   .footer .partnership--div {
     width: 80%;
   }
+}
+
+.cart--div {
+  padding-top: 5em;
+  min-height: 60vh;
 }
 
 * {

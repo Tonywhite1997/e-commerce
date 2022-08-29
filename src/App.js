@@ -6,7 +6,8 @@ import Categories from "./components/Categories";
 import { useState, useEffect, useRef } from "react";
 import commerce from "./lib/commerce";
 import Products from "./components/Products";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Carts from "./components/Carts";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -117,43 +118,57 @@ function App() {
 
   return (
     <>
-      <Header
-        handleSearchCategory={handleSearchCategory}
-        searchQuery={searchQuery}
-        handleSearchInput={handleSearchInput}
-        performProductSearch={performProductSearch}
-      />
-
-      <main className="main">
-        <Carousel />
-        <Categories
-          navigateCategory={navigateCategory}
-          isLoading={isLoading}
-          falsifySorting={falsifySorting}
+      <Router>
+        <Header
+          handleSearchCategory={handleSearchCategory}
+          searchQuery={searchQuery}
+          handleSearchInput={handleSearchInput}
+          performProductSearch={performProductSearch}
         />
-        {isSearching && !isLoading && (
-          <h3 className="search--result__text">{`${searchProductArray.length} result(s) found for "${searchInputRef.current}" in this category`}</h3>
-        )}
-        {isSearching && !isLoading && (
-          <button className="go--back__button" onClick={returnFromSearch}>
-            Back
-          </button>
-        )}
-        {!isLoading && (
-          <p className="current--category">Category- {currentCategory}</p>
-        )}
-        {isLoading && <i className="fa-solid fa-spinner"></i>}
-        {!isLoading && !isSearching && !isSorting && (
-          <Products products={products} />
-        )}
-        {!isLoading && isSearching && !isSorting && (
-          <Products products={searchProductArray} />
-        )}
-        {!isLoading && isSorting && !isSearching && (
-          <Products products={sortArray} />
-        )}
-      </main>
-
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <main className="main">
+                <Carousel />
+                <Categories
+                  navigateCategory={navigateCategory}
+                  isLoading={isLoading}
+                  falsifySorting={falsifySorting}
+                />
+                {isSearching && !isLoading && (
+                  <h3 className="search--result__text">{`${searchProductArray.length} result(s) found for "${searchInputRef.current}" in this category`}</h3>
+                )}
+                {isSearching && !isLoading && (
+                  <button
+                    className="go--back__button"
+                    onClick={returnFromSearch}
+                  >
+                    Back
+                  </button>
+                )}
+                {!isLoading && (
+                  <p className="current--category">
+                    Category- {currentCategory}
+                  </p>
+                )}
+                {isLoading && <i className="fa-solid fa-spinner"></i>}
+                {!isLoading && !isSearching && !isSorting && (
+                  <Products products={products} />
+                )}
+                {!isLoading && isSearching && !isSorting && (
+                  <Products products={searchProductArray} />
+                )}
+                {!isLoading && isSorting && !isSearching && (
+                  <Products products={sortArray} />
+                )}
+              </main>
+            }
+          />
+          <Route exact path="/Carts" element={<Carts />} />
+        </Routes>
+      </Router>
       <div className="go--up__div" onClick={scrollToTop}>
         <div className="go--up__button">
           <a>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import commerce from "../lib/commerce";
+import { Link } from "react-router-dom";
 
 function Header({
   handleSearchCategory,
@@ -18,7 +19,9 @@ function Header({
   }, []);
   return (
     <header className="header">
-      <Logo />
+      <Link to="/" className="header--logo">
+        <Logo />
+      </Link>
       <div className="header--searchfield">
         <select onChange={handleSearchCategory}>
           <option>All</option>
@@ -38,12 +41,12 @@ function Header({
         ></i>
       </div>
       <h4 className="header--login__link">Login</h4>
-      <div className="header--cart">
+      <Link to="/Carts" className="header--cart">
         <i className="fa-solid fa-cart-arrow-down"></i>
         <div className="product--quantity">
           <p>10</p>
         </div>
-      </div>
+      </Link>
     </header>
   );
 }
