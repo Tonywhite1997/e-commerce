@@ -42,12 +42,15 @@ function Header({
         ></i>
       </div>
       <h4 className="header--login__link">Login</h4>
-      <Link to="/Carts" className="header--cart">
-        <i className="fa-solid fa-cart-arrow-down"></i>
-        <div className="product--quantity">
-          <p>{cart.line_items && cart.line_items.length}</p>
-        </div>
-      </Link>
+      <div className="cart--container">
+        <Link to="/Carts" className="header--cart">
+          <i className="fa-solid fa-cart-arrow-down"></i>
+          <div className="product--quantity">
+            <p>{cart.line_items && cart.line_items.length}</p>
+          </div>
+        </Link>
+        <p className="cart--title">Cart</p>
+      </div>
     </header>
   );
 }
