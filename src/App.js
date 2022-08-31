@@ -1,11 +1,9 @@
 import React from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Carousel from "./components/Carousel";
-import Categories from "./components/Categories";
-import { useState, useEffect, useRef } from "react";
+import ProductPage from "./components/ProductPage";
+import { useState, useEffect, useRef, memo } from "react";
 import commerce from "./lib/commerce";
-import Products from "./components/Products";
 import Carts from "./components/Carts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -24,6 +22,7 @@ function App() {
     });
     return array;
   }
+
   async function fetchProcucts() {
     setIsLoading(true);
     try {
@@ -32,12 +31,39 @@ function App() {
       setProducts(newProducts);
       setIsLoading(false);
     } catch (error) {
-      console.log("There was a problem fetch the products", error);
+      setIsLoading(false);
     }
+  }
+
+  //working on cart page
+
+  const [cart, setCart] = useState([]);
+  async function fetchCart() {
+    const cart = await commerce.cart.retrieve();
+    setCart(cart);
+  }
+  async function addToCart(productId, quantity) {
+    const { cart } = await commerce.cart.add(productId, quantity);
+    setCart(cart);
+  }
+  async function removeItemFromCart(productId) {
+    const { cart } = await commerce.cart.remove(productId);
+    setCart(cart);
+  }
+  async function updateCartItem(productId, quantity) {
+    const { cart } = await commerce.cart.update(productId, { quantity });
+    setCart(cart);
+  }
+  async function emptyCart() {
+    const { cart } = await commerce.cart.empty();
+    setCart(cart);
   }
   useEffect(() => {
     fetchProcucts();
+    fetchCart();
   }, []);
+
+  console.log(cart);
 
   const categoryRef = useRef("All");
 
@@ -124,49 +150,41 @@ function App() {
           searchQuery={searchQuery}
           handleSearchInput={handleSearchInput}
           performProductSearch={performProductSearch}
+          cart={cart}
         />
         <Routes>
           <Route
             exact
             path="/"
             element={
-              <main className="main">
-                <Carousel />
-                <Categories
-                  navigateCategory={navigateCategory}
-                  isLoading={isLoading}
-                  falsifySorting={falsifySorting}
-                />
-                {isSearching && !isLoading && (
-                  <h3 className="search--result__text">{`${searchProductArray.length} result(s) found for "${searchInputRef.current}" in this category`}</h3>
-                )}
-                {isSearching && !isLoading && (
-                  <button
-                    className="go--back__button"
-                    onClick={returnFromSearch}
-                  >
-                    Back
-                  </button>
-                )}
-                {!isLoading && (
-                  <p className="current--category">
-                    Category- {currentCategory}
-                  </p>
-                )}
-                {isLoading && <i className="fa-solid fa-spinner"></i>}
-                {!isLoading && !isSearching && !isSorting && (
-                  <Products products={products} />
-                )}
-                {!isLoading && isSearching && !isSorting && (
-                  <Products products={searchProductArray} />
-                )}
-                {!isLoading && isSorting && !isSearching && (
-                  <Products products={sortArray} />
-                )}
-              </main>
+              <ProductPage
+                navigateCategory={navigateCategory}
+                isLoading={isLoading}
+                falsifySorting={falsifySorting}
+                isSearching={isSearching}
+                searchProductArray={searchProductArray}
+                searchInputRef={searchInputRef}
+                returnFromSearch={returnFromSearch}
+                currentCategory={currentCategory}
+                isSorting={isSorting}
+                products={products}
+                sortArray={sortArray}
+                addToCart={addToCart}
+              />
             }
           />
-          <Route exact path="/Carts" element={<Carts />} />
+          <Route
+            exact
+            path="/Carts"
+            element={
+              <Carts
+                cart={cart}
+                removeItemFromCart={removeItemFromCart}
+                emptyCart={emptyCart}
+                updateCartItem={updateCartItem}
+              />
+            }
+          />
         </Routes>
       </Router>
       <div className="go--up__div" onClick={scrollToTop}>
@@ -181,4 +199,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);

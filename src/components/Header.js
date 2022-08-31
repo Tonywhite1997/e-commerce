@@ -8,6 +8,7 @@ function Header({
   searchQuery,
   handleSearchInput,
   performProductSearch,
+  cart,
 }) {
   const [categories, setCategories] = useState([]);
   async function getCategories() {
@@ -44,7 +45,7 @@ function Header({
       <Link to="/Carts" className="header--cart">
         <i className="fa-solid fa-cart-arrow-down"></i>
         <div className="product--quantity">
-          <p>10</p>
+          <p>{cart.line_items && cart.line_items.length}</p>
         </div>
       </Link>
     </header>

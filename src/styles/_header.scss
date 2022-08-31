@@ -12,10 +12,11 @@
     color: $textclr;
     position: fixed;
     width: 100%;
+    padding-inline: 5%;
     z-index: 10;
     @include flex(row);
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 
     &--logo{
         @include flex(column);

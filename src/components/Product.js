@@ -1,6 +1,14 @@
-import React from "react";
+import React, { memo } from "react";
 
-function Product({ url, name, description, price, category }) {
+function Product({
+  url,
+  name,
+  description,
+  price,
+  category,
+  addToCart,
+  productId,
+}) {
   return (
     <div className="product">
       <div className="image--div">
@@ -12,10 +20,17 @@ function Product({ url, name, description, price, category }) {
       <p className="description">{description}</p>
       <div className="product--price__div">
         <p className="price">{price}</p>
-        <button className="add--to--cart">Add to cart</button>
+        <button
+          className="add--to--cart"
+          onClick={() => {
+            addToCart(productId, 1);
+          }}
+        >
+          Add to cart
+        </button>
       </div>
     </div>
   );
 }
 
-export default Product;
+export default memo(Product);

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import Product from "./Product";
 
-function Products({ products }) {
+function Products({ products, addToCart }) {
   return (
     <div className="main--product__container">
       {products.map(({ id, image, description, name, price, categories }) => {
@@ -11,6 +11,8 @@ function Products({ products }) {
             url={image.url}
             category={categories[0].name}
             name={name}
+            addToCart={addToCart}
+            productId={id}
             description={`${description
               .replaceAll("<p>", "")
               .replaceAll("</p>", "")}`}
@@ -22,4 +24,4 @@ function Products({ products }) {
   );
 }
 
-export default Products;
+export default memo(Products);
