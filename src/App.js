@@ -117,9 +117,11 @@ function App() {
     setIsSorting(true);
     setSortArray(
       products.filter((product) => {
-        if (product.categories[0].name === value) {
-          return product;
-        }
+        return product.categories.find((category) => {
+          if (category.name === value) {
+            return product;
+          }
+        });
       })
     );
   }
@@ -160,7 +162,6 @@ function App() {
               <ProductPage
                 navigateCategory={navigateCategory}
                 isLoading={isLoading}
-                falsifySorting={falsifySorting}
                 isSearching={isSearching}
                 searchProductArray={searchProductArray}
                 searchInputRef={searchInputRef}
@@ -175,7 +176,7 @@ function App() {
           />
           <Route
             exact
-            path="/Carts"
+            path="/cart"
             element={
               <Carts
                 cart={cart}

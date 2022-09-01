@@ -25,7 +25,7 @@ function Header({
       </Link>
       <div className="header--searchfield">
         <select onChange={handleSearchCategory}>
-          <option>All</option>
+          {/* <option>All</option> */}
           {categories.map(({ name }) => {
             return <option key={name}>{name}</option>;
           })}
@@ -43,7 +43,7 @@ function Header({
       </div>
       <h4 className="header--login__link">Login</h4>
       <div className="cart--container">
-        <Link to="/Carts" className="header--cart">
+        <Link to="/cart" className="header--cart">
           <i className="fa-solid fa-cart-arrow-down"></i>
           <div className="product--quantity">
             <p>{cart.line_items && cart.line_items.length}</p>

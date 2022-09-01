@@ -6,7 +6,6 @@ import Products from "./Products";
 function ProductPage({
   navigateCategory,
   isLoading,
-  falsifySorting,
   isSearching,
   searchProductArray,
   searchInputRef,
@@ -20,11 +19,7 @@ function ProductPage({
   return (
     <main className="main">
       <Carousel />
-      <Categories
-        navigateCategory={navigateCategory}
-        isLoading={isLoading}
-        falsifySorting={falsifySorting}
-      />
+      <Categories navigateCategory={navigateCategory} isLoading={isLoading} />
       {isSearching && !isLoading && (
         <h3 className="search--result__text">{`${searchProductArray.length} result(s) found for "${searchInputRef.current}" in this category`}</h3>
       )}
