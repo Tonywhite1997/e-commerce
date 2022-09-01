@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-// import Footer from "./components/Footer";
 import ProductPage from "./components/ProductPage";
 import { useState, useEffect, useRef, memo } from "react";
 import commerce from "./lib/commerce";
