@@ -1,11 +1,11 @@
 import React from "react";
-import Header from "./src/components/Header";
-import Footer from "./src/components/Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 // import Footer from "./components/Footer";
-import ProductPage from "./src/components/ProductPage";
+import ProductPage from "./components/ProductPage";
 import { useState, useEffect, useRef, memo } from "react";
-import commerce from "./src/lib/commerce";
-import Carts from "./src/components/Carts";
+import commerce from "./lib/commerce";
+import Carts from "./components/Carts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
