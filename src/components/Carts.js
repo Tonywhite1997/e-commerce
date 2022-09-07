@@ -1,7 +1,14 @@
 import React, { memo } from "react";
 import CartItem from "./CartItem";
+import { Link } from "react-router-dom";
 
-function Carts({ cart, removeItemFromCart, emptyCart, updateCartItem }) {
+function Carts({
+  cart,
+  removeItemFromCart,
+  emptyCart,
+  updateCartItem,
+  loggedIn,
+}) {
   const { line_items } = cart;
 
   return (
@@ -35,7 +42,12 @@ function Carts({ cart, removeItemFromCart, emptyCart, updateCartItem }) {
           </p>
           <div className="button--div">
             <button onClick={emptyCart}>Empty Cart</button>
-            <button>Checkout</button>
+            <Link
+              to={loggedIn ? "/checkout" : "/login"}
+              className="checkout--btn"
+            >
+              Checkout
+            </Link>
           </div>
         </div>
       )}

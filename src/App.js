@@ -5,6 +5,8 @@ import ProductPage from "./components/ProductPage";
 import { useState, useEffect, useRef, memo } from "react";
 import commerce from "./lib/commerce";
 import Carts from "./components/Carts";
+import LoginPage from "./components/LoginPage";
+import Checkout from "./components/CheckoutForm/Checkout/Checkout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -15,6 +17,12 @@ function App() {
   const [searchProductArray, setSearchProductArray] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  // const user = {
+  //   email: "tonywhite814.tw@gmail.com",
+  //   password: "123456",
+  // };
+  const [loggedIn, setLoggedIn] = useState(false);
+  console.log(loggedIn);
 
   function shuffleProducts(array) {
     array.sort(() => {
@@ -63,7 +71,7 @@ function App() {
     fetchCart();
   }, []);
 
-  console.log(cart);
+  // console.log(cart);
 
   const categoryRef = useRef("All");
 
@@ -126,11 +134,11 @@ function App() {
     );
   }
 
-  function falsifySorting() {
-    setCurrentCategory("All");
-    setIsSorting(false);
-    setIsSearching(false);
-  }
+  // function falsifySorting() {
+  //   setCurrentCategory("All");
+  //   setIsSorting(false);
+  //   setIsSearching(false);
+  // }
 
   function returnFromSearch() {
     setIsSearching(false);
@@ -153,6 +161,7 @@ function App() {
           handleSearchInput={handleSearchInput}
           performProductSearch={performProductSearch}
           cart={cart}
+          loggedIn={loggedIn}
         />
         <Routes>
           <Route
@@ -183,9 +192,15 @@ function App() {
                 removeItemFromCart={removeItemFromCart}
                 emptyCart={emptyCart}
                 updateCartItem={updateCartItem}
+                loggedIn={loggedIn}
               />
             }
           />
+          <Route
+            path="/login"
+            element={<LoginPage setLoggedIn={setLoggedIn} />}
+          />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Router>
       <div className="go--up__div" onClick={scrollToTop}>

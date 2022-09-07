@@ -1,6 +1,8 @@
 @import "./variables";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,300&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&display=swap');
+
 @mixin flex($direction) {
     display: flex;
     justify-content: center;
@@ -12,7 +14,6 @@
     padding-top: 5em;
     padding-bottom: 2em;
     overflow-x: hidden;
-    // border: 1px solid green;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,7 +21,7 @@
     &--carousel{
         position: relative;
         height: 15rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Fraunces', serif;
         width: 100%;
         @include flex(row);
         align-items: center;
@@ -31,6 +32,7 @@
             color: rgb(230, 229, 229);
             width: 100%;
             padding: 0 1.5em;
+            font-size: 2.5rem;
             font-weight: 500;
         }
 
