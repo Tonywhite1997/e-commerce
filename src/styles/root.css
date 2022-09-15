@@ -565,6 +565,7 @@
 }
 
 .footer .logo--div {
+  padding-left: 1.5em;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1030,7 +1031,7 @@ button {
   background-color: green;
 }
 
-.checkout--page .checkout--steps__div .name--div, .checkout--page .checkout--steps__div .address--div__line, .checkout--page .checkout--steps__div .city--code__div {
+.checkout--page .checkout--steps__div .name--div, .checkout--page .checkout--steps__div .address--div__line, .checkout--page .checkout--steps__div .city--code__div, .checkout--page .checkout--steps__div .countries--div, .checkout--page .checkout--steps__div .shipping--options__div {
   width: 500px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1041,14 +1042,40 @@ button {
           justify-content: space-between;
 }
 
-.checkout--page .checkout--steps__div .name--div input, .checkout--page .checkout--steps__div .address--div__line input, .checkout--page .checkout--steps__div .city--code__div input {
+.checkout--page .checkout--steps__div .name--div input, .checkout--page .checkout--steps__div .name--div select, .checkout--page .checkout--steps__div .address--div__line input, .checkout--page .checkout--steps__div .address--div__line select, .checkout--page .checkout--steps__div .city--code__div input, .checkout--page .checkout--steps__div .city--code__div select, .checkout--page .checkout--steps__div .countries--div input, .checkout--page .checkout--steps__div .countries--div select, .checkout--page .checkout--steps__div .shipping--options__div input, .checkout--page .checkout--steps__div .shipping--options__div select {
   height: 30px;
   width: 200px;
   border-radius: .3em;
 }
 
-.checkout--page .checkout--steps__div .name--div label, .checkout--page .checkout--steps__div .address--div__line label, .checkout--page .checkout--steps__div .city--code__div label {
+.checkout--page .checkout--steps__div .name--div label, .checkout--page .checkout--steps__div .address--div__line label, .checkout--page .checkout--steps__div .city--code__div label, .checkout--page .checkout--steps__div .countries--div label, .checkout--page .checkout--steps__div .shipping--options__div label {
   font-size: .8rem;
+}
+
+.checkout--page .checkout--steps__div .button--div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1em;
+  margin-top: 3em;
+}
+
+.checkout--page .checkout--steps__div .button--div .back--to--cart {
+  padding: .2em 1em;
+  background-color: #232423;
+  color: #c6c5c5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.checkout--page .checkout--steps__div .button--div .next--button {
+  padding: 0 2em;
+  background-color: green;
+  color: white;
+  border: none;
 }
 
 * {

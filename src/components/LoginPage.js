@@ -1,19 +1,26 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-function LoginPage({ setLoggedIn }) {
+function LoginPage({ setLoggedIn, loggedIn }) {
   const user = {
     email: "tonywhite814.tw@gmail.com",
     password: "123456",
   };
 
-  const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
+  const [loginDetails, setLoginDetails] = useState({
+    email: "",
+    password: "",
+  });
 
-  console.log(loginDetails);
+  const [keepMe, setKeepMe] = useState(false);
 
   function handleDetailsInput({ target }) {
     const { name } = target;
     setLoginDetails((prevInput) => {
-      return { ...prevInput, [name]: target.value };
+      return {
+        ...prevInput,
+        [name]: target.value,
+      };
     });
   }
 
@@ -21,7 +28,7 @@ function LoginPage({ setLoggedIn }) {
     e.preventDefault();
     const { email, password } = loginDetails;
     if (email === user.email && password === user.password) {
-      setLoggedIn(true);
+      return setLoggedIn(true);
     }
   }
   return (
@@ -31,7 +38,7 @@ function LoginPage({ setLoggedIn }) {
       </h4>
       <div className="login--page__details">
         <h4>
-          To login, use "tonywhite814.tw@gmail.com" as email and "123456 as
+          To login, use "tonywhite814.tw@gmail.com" as email and "123456" as
           password.
         </h4>
       </div>
@@ -60,10 +67,24 @@ function LoginPage({ setLoggedIn }) {
           />
         </div>
         <div className="keep--me__logged">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={keepMe}
+            onChange={() => {
+              setKeepMe((prevState) => !prevState);
+            }}
+          />
           <label>keep me logged in</label>
         </div>
-        <button className="login--button">LOGIN</button>
+        <Link
+          to={
+            loginDetails.email === user.email &&
+            loginDetails.password === user.password &&
+            "/"
+          }
+        >
+          <button className="login--button">LOGIN</button>
+        </Link>
       </form>
     </div>
   );

@@ -17,12 +17,8 @@ function App() {
   const [searchProductArray, setSearchProductArray] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  // const user = {
-  //   email: "tonywhite814.tw@gmail.com",
-  //   password: "123456",
-  // };
+
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(loggedIn);
 
   function shuffleProducts(array) {
     array.sort(() => {
@@ -134,12 +130,6 @@ function App() {
     );
   }
 
-  // function falsifySorting() {
-  //   setCurrentCategory("All");
-  //   setIsSorting(false);
-  //   setIsSearching(false);
-  // }
-
   function returnFromSearch() {
     setIsSearching(false);
   }
@@ -162,6 +152,7 @@ function App() {
           performProductSearch={performProductSearch}
           cart={cart}
           loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
         />
         <Routes>
           <Route
@@ -198,9 +189,11 @@ function App() {
           />
           <Route
             path="/login"
-            element={<LoginPage setLoggedIn={setLoggedIn} />}
+            element={
+              <LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
+            }
           />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout cart={cart} />} />
         </Routes>
       </Router>
       <div className="go--up__div" onClick={scrollToTop}>

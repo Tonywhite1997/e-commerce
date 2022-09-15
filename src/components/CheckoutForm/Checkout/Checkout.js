@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ShippingForm from "../../CheckoutForm/ShippingForm";
 import PaymentForm from "../../CheckoutForm/PaymentForm";
+import commerce from "../../../lib/commerce";
 
-function Checkout() {
+function Checkout({ cart }) {
   const [activeStep, setActiveStep] = useState(0);
+  const [checkoutToken, setCheckoutToken] = useState(null);
+
+  async function generateToken() {
+    try {
+      const token = await commerce.checkout.generateToken(cart.id, {
+        type: "cart",
+      });
+      setCheckoutToken(token);
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    generateToken();
+  }, []);
 
   function Form() {
-    return activeStep === 0 ? <ShippingForm /> : <PaymentForm />;
+    return activeStep === 0 ? (
+      <ShippingForm checkoutToken={checkoutToken} />
+    ) : (
+      <PaymentForm />
+    );
   }
 
   return (
@@ -38,7 +57,7 @@ function Checkout() {
             </p>
           </div>
         </div>
-        <Form />
+        {checkoutToken && <Form />}
       </div>
     </div>
   );

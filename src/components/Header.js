@@ -10,6 +10,7 @@ function Header({
   performProductSearch,
   cart,
   loggedIn,
+  setLoggedIn,
 }) {
   const [categories, setCategories] = useState([]);
   async function getCategories() {
@@ -19,6 +20,9 @@ function Header({
   useEffect(() => {
     getCategories();
   }, []);
+  function logOut() {
+    setLoggedIn(false);
+  }
   return (
     <header className="header">
       <Link to="/" className="header--logo">
@@ -42,7 +46,9 @@ function Header({
         ></i>
       </div>
       {loggedIn ? (
-        "Logout"
+        <Link className="header--login__link" to="login" onClick={logOut}>
+          Logout
+        </Link>
       ) : (
         <Link className="header--login__link" to="login">
           Login
