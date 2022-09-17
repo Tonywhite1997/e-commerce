@@ -22,7 +22,9 @@ function Header({
   }, []);
   function logOut() {
     setLoggedIn(false);
+    localStorage.removeItem("ecommerceLogin");
   }
+
   return (
     <header className="header">
       <Link to="/" className="header--logo">

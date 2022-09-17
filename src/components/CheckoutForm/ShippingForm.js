@@ -120,7 +120,8 @@ function ShippingForm({ checkoutToken }) {
         </div>
       </div>
       <div className="countries--div">
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", gap: ".5em" }}>
+          <label>Shipping Country*</label>
           <select onChange={handleChangeCountry}>
             {countries.length &&
               countries.map(({ id, label }) => {
@@ -132,7 +133,8 @@ function ShippingForm({ checkoutToken }) {
               })}
           </select>
         </div>
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", gap: ".5em" }}>
+          <label>Shipping Region*</label>
           <select
             value={shippingSubDivision}
             onChange={handleChangeSubDivision}
@@ -148,15 +150,18 @@ function ShippingForm({ checkoutToken }) {
         </div>
       </div>
       <div className="shipping--options__div">
-        <select value={shippingOption} onChange={handleChangeOption}>
-          {options.map(({ id, label }) => {
-            return (
-              <option key={id} value={id}>
-                {label}
-              </option>
-            );
-          })}
-        </select>
+        <div style={{ display: "flex", flexDirection: "column", gap: ".5em" }}>
+          <label>Shipping Rate</label>
+          <select value={shippingOption} onChange={handleChangeOption}>
+            {options.map(({ id, label }) => {
+              return (
+                <option key={id} value={id}>
+                  {label}
+                </option>
+              );
+            })}
+          </select>
+        </div>
       </div>
       <div className="button--div">
         <Link to="/cart" className="back--to--cart">

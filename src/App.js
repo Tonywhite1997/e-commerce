@@ -20,6 +20,12 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("ecommerceLogin"));
+    if (!data) return;
+    setLoggedIn(data.keepMe);
+  }, []);
+
   function shuffleProducts(array) {
     array.sort(() => {
       return Math.floor(Math.random() - 0.5);

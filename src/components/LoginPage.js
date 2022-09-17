@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function LoginPage({ setLoggedIn, loggedIn }) {
+function LoginPage({ setLoggedIn }) {
   const user = {
     email: "tonywhite814.tw@gmail.com",
     password: "123456",
@@ -10,27 +10,33 @@ function LoginPage({ setLoggedIn, loggedIn }) {
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
+    keepMe: false,
   });
 
-  const [keepMe, setKeepMe] = useState(false);
-
   function handleDetailsInput({ target }) {
-    const { name } = target;
-    setLoginDetails((prevInput) => {
-      return {
-        ...prevInput,
-        [name]: target.value,
-      };
+    setLoginDetails((prevDetails) => {
+      if (target.type === "checkbox") {
+        return { ...prevDetails, keepMe: !prevDetails.keepMe };
+      } else {
+        const { name } = target;
+        return { ...prevDetails, [name]: target.value };
+      }
     });
   }
 
-  function handleLoginDetails(e) {
-    e.preventDefault();
+  function handleLoginDetails() {
     const { email, password } = loginDetails;
     if (email === user.email && password === user.password) {
       return setLoggedIn(true);
     }
   }
+
+  useEffect(() => {
+    if (loginDetails.keepMe) {
+      localStorage.setItem("ecommerceLogin", JSON.stringify(loginDetails));
+    }
+  }, [handleLoginDetails]);
+
   return (
     <div className="login--page">
       <h4 className="important--notice">
@@ -42,7 +48,7 @@ function LoginPage({ setLoggedIn, loggedIn }) {
           password.
         </h4>
       </div>
-      <form className="login--page__form" onClick={handleLoginDetails}>
+      <form className="login--page__form">
         <div className="icon--div">
           <img className="key--icon" src="../keyicon.png" />
         </div>
@@ -69,12 +75,11 @@ function LoginPage({ setLoggedIn, loggedIn }) {
         <div className="keep--me__logged">
           <input
             type="checkbox"
-            checked={keepMe}
-            onChange={() => {
-              setKeepMe((prevState) => !prevState);
-            }}
+            id="keepMe"
+            checked={loginDetails.keepMe}
+            onChange={handleDetailsInput}
           />
-          <label>keep me logged in</label>
+          <label htmlFor="keepMe">keep me logged in</label>
         </div>
         <Link
           to={
@@ -83,7 +88,9 @@ function LoginPage({ setLoggedIn, loggedIn }) {
             "/"
           }
         >
-          <button className="login--button">LOGIN</button>
+          <button className="login--button" onClick={handleLoginDetails}>
+            LOGIN
+          </button>
         </Link>
       </form>
     </div>
