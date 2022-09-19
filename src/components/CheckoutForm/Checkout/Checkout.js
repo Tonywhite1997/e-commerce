@@ -3,9 +3,10 @@ import ShippingForm from "../../CheckoutForm/ShippingForm";
 import PaymentForm from "../../CheckoutForm/PaymentForm";
 import commerce from "../../../lib/commerce";
 
-function Checkout({ cart }) {
+function Checkout({ cart, order, handleCaptureCheckout, errorMesage }) {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const [shippingData, setShippingData] = useState({});
 
   async function generateToken() {
     try {
@@ -20,11 +21,34 @@ function Checkout({ cart }) {
     generateToken();
   }, []);
 
+  function handleNextButton() {
+    setActiveStep((prevStep) => prevStep + 1);
+  }
+  function handleBackButton() {
+    setActiveStep((prevStep) => prevStep - 1);
+  }
+
+  function handleFormSubmit(data) {
+    setShippingData(data);
+    handleNextButton();
+  }
+
+  console.log(shippingData);
+
   function Form() {
     return activeStep === 0 ? (
-      <ShippingForm checkoutToken={checkoutToken} />
+      <ShippingForm
+        checkoutToken={checkoutToken}
+        handleFormSubmit={handleFormSubmit}
+      />
     ) : (
-      <PaymentForm />
+      <PaymentForm
+        checkoutToken={checkoutToken}
+        nextStep={handleNextButton}
+        handleBackButton={handleBackButton}
+        handleCaptureCheckout={handleCaptureCheckout}
+        shippingData={shippingData}
+      />
     );
   }
 

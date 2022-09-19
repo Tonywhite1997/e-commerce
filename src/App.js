@@ -48,6 +48,9 @@ function App() {
   //working on cart page
 
   const [cart, setCart] = useState([]);
+  const [order, setOrder] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
+
   async function fetchCart() {
     const cart = await commerce.cart.retrieve();
     setCart(cart);
@@ -68,12 +71,29 @@ function App() {
     const { cart } = await commerce.cart.empty();
     setCart(cart);
   }
+
+  async function refreshcart() {
+    const newcart = await commerce.cart.refresh();
+    setCart(newcart);
+  }
+
+  async function handleCaptureCheckout(checkoutTokenId, newOrder) {
+    try {
+      const incomingOrder = await commerce.checkout.capture(
+        checkoutTokenId,
+        newOrder
+      );
+      setOrder(incomingOrder);
+      refreshcart();
+    } catch (error) {
+      setErrorMessage(error.data.error.message);
+    }
+  }
+
   useEffect(() => {
     fetchProcucts();
     fetchCart();
   }, []);
-
-  // console.log(cart);
 
   const categoryRef = useRef("All");
 
@@ -199,7 +219,17 @@ function App() {
               <LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
             }
           />
-          <Route path="/checkout" element={<Checkout cart={cart} />} />
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                cart={cart}
+                order={order}
+                handleCaptureCheckout={handleCaptureCheckout}
+                errorMessage={errorMessage}
+              />
+            }
+          />
         </Routes>
       </Router>
       <div className="go--up__div" onClick={scrollToTop}>

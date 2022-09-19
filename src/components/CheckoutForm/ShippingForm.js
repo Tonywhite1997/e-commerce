@@ -2,7 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import commerce from "../../lib/commerce";
 
-function ShippingForm({ checkoutToken }) {
+function ShippingForm({ checkoutToken, handleFormSubmit }) {
+  const [buyerDetails, setBuyerDetails] = useState({
+    firstName: "Tony",
+    lastName: "Omodaratan",
+    address: "No 2b Irunja",
+    email: "tonywhite814.tw@gmail.com",
+    city: "Ilawe",
+    zip: "361102",
+  });
+
+  function changeBuyerDetails({ target }) {
+    const { value, name } = target;
+    setBuyerDetails((prevDetails) => {
+      return { ...prevDetails, [name]: value };
+    });
+  }
+
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubDivisions, setShippingSubDivisions] = useState([]);
@@ -82,41 +98,88 @@ function ShippingForm({ checkoutToken }) {
   });
 
   return (
-    <form className="shipping--form">
+    <form
+      className="shipping--form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleFormSubmit({
+          ...buyerDetails,
+          shippingCountry,
+          shippingSubDivision,
+          shippingOption,
+        });
+      }}
+    >
       <div className="name--div">
         <div
           className="first-name"
           style={{ display: "flex", flexDirection: "column", gap: ".5em" }}
         >
           <label>First Name*</label>
-          <input type="text" required />
+          <input
+            type="text"
+            required
+            name="firstName"
+            value={buyerDetails.firstName}
+            onChange={changeBuyerDetails}
+          />
         </div>
         <div
           className="last--name"
           style={{ display: "flex", flexDirection: "column", gap: ".5em" }}
         >
           <label>Last Name*</label>
-          <input type="text" required />
+          <input
+            type="text"
+            required
+            name="lastName"
+            value={buyerDetails.lastName}
+            onChange={changeBuyerDetails}
+          />
         </div>
       </div>
       <div className="address--div__line">
         <div style={{ display: "flex", flexDirection: "column", gap: ".5em" }}>
           <label>Address*</label>
-          <input type="text" required />
+          <input
+            type="text"
+            required
+            name="address"
+            value={buyerDetails.address}
+            onChange={changeBuyerDetails}
+          />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: ".5em" }}>
           <label>Email*</label>
-          <input type="email" required />
+          <input
+            type="email"
+            required
+            name="email"
+            value={buyerDetails.email}
+            onChange={changeBuyerDetails}
+          />
         </div>
       </div>
       <div className="city--code__div">
         <div style={{ display: "flex", flexDirection: "column", gap: ".5em" }}>
           <label>City*</label>
-          <input type="text" required />
+          <input
+            type="text"
+            required
+            name="city"
+            value={buyerDetails.city}
+            onChange={changeBuyerDetails}
+          />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: ".5em" }}>
           <label>Zip/Postal code*</label>
-          <input type="text" required />
+          <input
+            type="text"
+            required
+            name="zip"
+            value={buyerDetails.zip}
+            onChange={changeBuyerDetails}
+          />
         </div>
       </div>
       <div className="countries--div">
