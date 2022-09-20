@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ShippingForm from "../../CheckoutForm/ShippingForm";
 import PaymentForm from "../../CheckoutForm/PaymentForm";
+import Confirmation from "../Confirmation";
 import commerce from "../../../lib/commerce";
+import { useNavigate } from "react-router-dom";
 
-function Checkout({ cart, order, handleCaptureCheckout, errorMesage }) {
+function Checkout({ cart, handleCaptureCheckout }) {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
+  const history = useNavigate();
 
   async function generateToken() {
     try {
@@ -14,7 +17,9 @@ function Checkout({ cart, order, handleCaptureCheckout, errorMesage }) {
         type: "cart",
       });
       setCheckoutToken(token);
-    } catch (error) {}
+    } catch (error) {
+      history.pushState("/");
+    }
   }
 
   useEffect(() => {
@@ -33,23 +38,27 @@ function Checkout({ cart, order, handleCaptureCheckout, errorMesage }) {
     handleNextButton();
   }
 
-  console.log(shippingData);
-
   function Form() {
-    return activeStep === 0 ? (
-      <ShippingForm
-        checkoutToken={checkoutToken}
-        handleFormSubmit={handleFormSubmit}
-      />
-    ) : (
-      <PaymentForm
-        checkoutToken={checkoutToken}
-        nextStep={handleNextButton}
-        handleBackButton={handleBackButton}
-        handleCaptureCheckout={handleCaptureCheckout}
-        shippingData={shippingData}
-      />
-    );
+    if (activeStep === 0) {
+      return (
+        <ShippingForm
+          checkoutToken={checkoutToken}
+          handleFormSubmit={handleFormSubmit}
+        />
+      );
+    } else if (activeStep === 1) {
+      return (
+        <PaymentForm
+          checkoutToken={checkoutToken}
+          nextStep={handleNextButton}
+          handleBackButton={handleBackButton}
+          handleCaptureCheckout={handleCaptureCheckout}
+          shippingData={shippingData}
+        />
+      );
+    } else {
+      return <Confirmation shippingData={shippingData} />;
+    }
   }
 
   return (
@@ -71,12 +80,12 @@ function Checkout({ cart, order, handleCaptureCheckout, errorMesage }) {
           <div className="payment">
             <small
               style={{
-                backgroundColor: activeStep === 1 ? "green" : "#232423",
+                backgroundColor: activeStep !== 0 ? "green" : "#232423",
               }}
             >
-              2
+              {activeStep === 2 ? "✓" : "2"}
             </small>
-            <p style={{ color: activeStep === 1 ? "#232423" : "grey" }}>
+            <p style={{ color: activeStep !== 0 ? "#232423" : "grey" }}>
               Payment details
             </p>
           </div>

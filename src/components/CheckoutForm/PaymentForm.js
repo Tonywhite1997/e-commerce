@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useDebugValue, useState } from "react";
 import Review from "./Checkout/Review";
 import {
   Elements,
@@ -11,10 +11,13 @@ function PaymentForm({
   checkoutToken,
   shippingData,
   handleBackButton,
-  handleCaptureButton,
+  handleCaptureCheckout,
   nextStep,
 }) {
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(e, elements, stripe) {
     e.preventDefault();
@@ -25,20 +28,22 @@ function PaymentForm({
       card: cardElement,
     });
     if (error) {
-      console.log(error);
+      setIsError(true);
+      setErrorMessage(error.message);
     } else {
+      setIsError(false);
       const orderData = {
         line_items: checkoutToken.live.line_items,
         customer: {
-          firstname: shippingData.firstname,
-          lastname: shippingData.lastname,
+          firstname: shippingData.firstName,
+          lastname: shippingData.lastName,
           email: shippingData.email,
         },
         shipping: {
           name: "primary",
-          street: shippingData.address1,
+          street: shippingData.address,
           town_city: shippingData.city,
-          county_state: shippingData.shippingSubdivision,
+          county_state: shippingData.shippingSubDivision,
           postal_zip_code: shippingData.zip,
           country: shippingData.shippingCountry,
         },
@@ -51,7 +56,7 @@ function PaymentForm({
         },
       };
 
-      handleCaptureButton(checkoutToken.id, orderData);
+      handleCaptureCheckout(checkoutToken.id, orderData);
       nextStep();
     }
   }
@@ -80,6 +85,23 @@ function PaymentForm({
           )}
         </ElementsConsumer>
       </Elements>
+      {isError && (
+        <div
+          style={{
+            marginTop: "1em",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: ".2em",
+          }}
+        >
+          <i
+            className="fa-solid fa-circle-exclamation"
+            style={{ color: "red" }}
+          ></i>
+          <p>{errorMessage}</p>
+        </div>
+      )}
     </>
   );
 }
