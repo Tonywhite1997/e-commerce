@@ -11,11 +11,16 @@ function ProductPage({
   searchInputRef,
   returnFromSearch,
   currentCategory,
+  setCurrentCategory,
   isSorting,
   products,
   sortArray,
   addToCart,
 }) {
+  if (!isSearching && !isSorting) {
+    setCurrentCategory("All");
+  }
+
   return (
     <main className="main">
       <Carousel />

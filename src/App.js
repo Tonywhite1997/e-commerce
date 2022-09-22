@@ -116,7 +116,7 @@ function App() {
     if (!searchQuery) {
       return;
     }
-    setCurrentCategory("All");
+    setCurrentCategory(categoryRef.current);
     setIsSearching(true);
     setIsSorting(false);
     if (categoryRef.current !== "All") {
@@ -193,6 +193,7 @@ function App() {
                 searchInputRef={searchInputRef}
                 returnFromSearch={returnFromSearch}
                 currentCategory={currentCategory}
+                setCurrentCategory={setCurrentCategory}
                 isSorting={isSorting}
                 products={products}
                 sortArray={sortArray}
@@ -224,6 +225,7 @@ function App() {
             element={
               <Checkout
                 cart={cart}
+                setCart={setCart}
                 order={order}
                 handleCaptureCheckout={handleCaptureCheckout}
                 errorMessage={errorMessage}

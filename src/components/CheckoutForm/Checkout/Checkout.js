@@ -5,7 +5,7 @@ import Confirmation from "../Confirmation";
 import commerce from "../../../lib/commerce";
 import { useNavigate } from "react-router-dom";
 
-function Checkout({ cart, handleCaptureCheckout }) {
+function Checkout({ cart, setCart, handleCaptureCheckout }) {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
@@ -54,6 +54,7 @@ function Checkout({ cart, handleCaptureCheckout }) {
           handleBackButton={handleBackButton}
           handleCaptureCheckout={handleCaptureCheckout}
           shippingData={shippingData}
+          setCart={setCart}
         />
       );
     } else {

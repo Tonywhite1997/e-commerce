@@ -89,6 +89,12 @@
         text-decoration: none
     }
 
+    .logout--cart__div{
+        @include flex(row);
+        gap: 1em;
+        align-items: center;
+    }
+
 
     .cart--container{
         @include flex(row);
@@ -131,5 +137,35 @@
                     }
                 }
             }
+    }
+}
+
+@media screen and (max-width: 700px){
+    .header {
+        height: 12rem;
+        @include flex(column);
+        justify-content: center;
+        gap: 1em;
+        padding: 2em 0;
+
+        &--logo{
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            padding-left: .5em;
+        }
+
+        &--searchfield{
+            // border: 1px solid red;
+            width: 90%;
+        }
+
+        .logout--cart__div{
+            // border: 1px solid red;
+            width: 100%;
+            padding: 0 .8em;
+            @include flex(row-reverse);
+            justify-content: space-between;
+        }
     }
 }

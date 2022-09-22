@@ -10,12 +10,15 @@
 
 .login--page{
     padding-top: 5rem;
+    min-height: 100vh;
     @include flex(column);
     gap: 2em;
 
     .important--notice{
         color: $logoclr;
         margin-top: 2em;
+        padding: 0 1em;
+        text-align: center;
     }
 
     &__details{
@@ -23,7 +26,8 @@
         color: $textclr;
         margin-top: 2em;
         height: 4rem;
-        padding: 0 1em;
+        padding: 1em 1em;
+        text-align: center;
         @include flex(row);
         font-family: 'Fraunces', serif;
     }
@@ -35,6 +39,7 @@
         background-color: $headerclr;
         color: $logoclr;
         border-radius: .5em;
+        margin-bottom: 1em;
 
         .icon--div{
             background-color: $textclr;
@@ -88,4 +93,10 @@
         }
     }
     
+}
+
+@media screen and (max-width: 700px){
+    .login--page{
+        padding-top: 15rem;
+    }
 }

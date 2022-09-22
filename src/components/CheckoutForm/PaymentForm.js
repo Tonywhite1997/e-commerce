@@ -1,5 +1,6 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useState } from "react";
 import Review from "./Checkout/Review";
+import commerce from "../../lib/commerce";
 import {
   Elements,
   CardElement,
@@ -13,11 +14,17 @@ function PaymentForm({
   handleBackButton,
   handleCaptureCheckout,
   nextStep,
+  setCart,
 }) {
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  async function emptyCart() {
+    const cart = await commerce.cart.delete();
+    setCart(cart);
+  }
 
   async function handleSubmit(e, elements, stripe) {
     e.preventDefault();
@@ -57,6 +64,7 @@ function PaymentForm({
       };
 
       handleCaptureCheckout(checkoutToken.id, orderData);
+      emptyCart();
       nextStep();
     }
   }

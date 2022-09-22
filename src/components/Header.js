@@ -47,23 +47,25 @@ function Header({
           onClick={performProductSearch}
         ></i>
       </div>
-      {loggedIn ? (
-        <Link className="header--login__link" to="login" onClick={logOut}>
-          Logout
-        </Link>
-      ) : (
-        <Link className="header--login__link" to="login">
-          Login
-        </Link>
-      )}
-      <div className="cart--container">
-        <Link to="/cart" className="header--cart">
-          <i className="fa-solid fa-cart-arrow-down"></i>
-          <div className="product--quantity">
-            <p>{cart.line_items && cart.line_items.length}</p>
-          </div>
-        </Link>
-        <p className="cart--title">Cart</p>
+      <div className="logout--cart__div">
+        {loggedIn ? (
+          <Link className="header--login__link" to="login" onClick={logOut}>
+            Logout
+          </Link>
+        ) : (
+          <Link className="header--login__link" to="login">
+            Login
+          </Link>
+        )}
+        <div className="cart--container">
+          <Link to="/cart" className="header--cart">
+            <i className="fa-solid fa-cart-arrow-down"></i>
+            <div className="product--quantity">
+              <p>{cart.line_items && cart.line_items.length}</p>
+            </div>
+          </Link>
+          <p className="cart--title">Cart</p>
+        </div>
       </div>
     </header>
   );

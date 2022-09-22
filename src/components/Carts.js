@@ -13,7 +13,10 @@ function Carts({
 
   return (
     <main className="cart--page">
-      <h3>Your have {cart.total_unique_items} unique item(s) </h3>
+      <h3>
+        You have {cart.total_unique_items ? cart.total_unique_items : "0"}{" "}
+        unique item(s)
+      </h3>
       <div className="items--container">
         {line_items &&
           line_items.map((item) => {
@@ -32,10 +35,10 @@ function Carts({
             );
           })}
       </div>
-      {line_items.length !== 0 && (
+      {line_items && line_items.length !== 0 && (
         <div className="total--price__div">
           <p>
-            SubTotal:{" "}
+            Total:{" "}
             <span className="total--price">
               {cart.subtotal.formatted_with_symbol}
             </span>{" "}
