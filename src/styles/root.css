@@ -399,13 +399,16 @@
 }
 
 .main .current--category {
-  width: 93%;
+  width: 100%;
+  padding: 0 1em;
   font-size: 1.25rem;
   text-align: left;
   margin-bottom: .5em;
 }
 
 .main .search--result__text {
+  width: 100%;
+  padding: 0 1em;
   font-family: 'Roboto Slab', serif;
   font-size: 1.5rem;
   color: rgba(0, 0, 0, 0.8);
@@ -1346,6 +1349,9 @@ button {
   .checkout--page {
     padding-top: 12rem;
   }
+  .checkout--page .checkout--steps__div {
+    width: 100%;
+  }
   .checkout--page .checkout--steps__div .address--div {
     width: 100%;
     gap: 1em;
@@ -1391,6 +1397,9 @@ button {
   }
   .checkout--page .checkout--steps__div .payment--card {
     width: 350px;
+  }
+  .checkout--page .checkout--steps__div .address--div {
+    font-size: .7rem;
   }
   .checkout--page .checkout--steps__div .address--div hr {
     height: 3rem;

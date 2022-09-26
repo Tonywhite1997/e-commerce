@@ -198,6 +198,7 @@
         padding-top: 12rem;
     
         .checkout--steps__div {
+            width: 100%;
             // border: 1px solid red;
 
             .address--div{
@@ -240,14 +241,14 @@
 
         .checkout--steps__div{
             max-width: 350px;
-            // border: 1px solid red;
 
             .payment--card{
                 width: 350px;
             }
 
             .address--div{
-
+                // border: 1px solid red;
+                font-size: .7rem;
                 hr{
                     height: 3rem;
                 }
