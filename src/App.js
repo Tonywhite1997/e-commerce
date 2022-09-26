@@ -10,6 +10,7 @@ import Checkout from "./components/CheckoutForm/Checkout/Checkout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+  const [isOnline, setIsOnline] = useState(true);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [productsBasedOnCategoryArray, setProductsBasedOnCategoryArray] =
@@ -24,6 +25,16 @@ function App() {
     const data = JSON.parse(localStorage.getItem("ecommerceLogin"));
     if (!data) return;
     setLoggedIn(data.keepMe);
+  }, []);
+
+  function checkInternetConnection() {
+    window.addEventListener("load", () => {
+      navigator.onLine ? setIsOnline(true) : setIsOnline(false);
+    });
+  }
+
+  useEffect(() => {
+    checkInternetConnection();
   }, []);
 
   function shuffleProducts(array) {
@@ -96,6 +107,7 @@ function App() {
   }, []);
 
   const categoryRef = useRef("All");
+  const [currentCategory, setCurrentCategory] = useState("All");
 
   function handleSearchCategory({ target }) {
     categoryRef.current = target.value;
@@ -114,7 +126,7 @@ function App() {
 
   function performProductSearch() {
     if (!searchQuery) {
-      return;
+      return alert("Search query can not be empty.");
     }
     setCurrentCategory(categoryRef.current);
     setIsSearching(true);
@@ -139,7 +151,11 @@ function App() {
   const [isSorting, setIsSorting] = useState(false);
   const [sortArray, setSortArray] = useState([]);
 
-  const [currentCategory, setCurrentCategory] = useState("All");
+  useEffect(() => {
+    if (!isSearching && !isSorting) {
+      setCurrentCategory("All");
+    }
+  }, [isSearching, isLoading]);
 
   function navigateCategory(value) {
     setCurrentCategory(value);
@@ -186,6 +202,7 @@ function App() {
             path="/"
             element={
               <ProductPage
+                isOnline={isOnline}
                 navigateCategory={navigateCategory}
                 isLoading={isLoading}
                 isSearching={isSearching}

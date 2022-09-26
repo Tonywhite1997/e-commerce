@@ -25,6 +25,7 @@ function ShippingForm({ checkoutToken, handleFormSubmit }) {
   const [shippingSubDivision, setShippingSubDivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
   const [shippingOption, setShippingOption] = useState("");
+  // const [isDataLoading, setIsDataLoading] = useState(true);
 
   async function fetchShippingCountries(checkoutTokenId) {
     const { countries } = await commerce.services.localeListShippingCountries(

@@ -14,6 +14,7 @@
     align-items: center;
 
     .checkout--steps__div{
+        position: relative;
         box-shadow: 0 0 5px $headerclr;
         padding: 0 1em;
         padding-bottom: 2em;
@@ -100,7 +101,6 @@
             }
 
             .button--div {
-                // border: 1px solid red;
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
@@ -108,11 +108,19 @@
                 margin-top: 3em;
 
                 .back--to--cart {
+                    border: 1px solid $headerclr;
                     padding: .2em 1em;
                     background-color: $headerclr;
                     color: $textclr;
                     text-decoration: none;
                     font-weight: 500;
+                    transition: all 500ms ease-in;
+                    
+                    &:hover{
+                        color: $logoclr;
+                        background-color: white;
+                        border: 1px solid $headerclr;
+                    }
                 }
 
                 .next--button {
@@ -120,6 +128,13 @@
                     background-color: $logoclr;
                     color: white;
                     border: none;
+                    transition: all 500ms ease-in;
+                    
+                    &:hover {
+                        color: $logoclr;
+                        background-color: white;
+                        border: 1px solid $headerclr;
+                    }
                 }
             }
         }
@@ -180,7 +195,7 @@
 
 @media screen and (max-width: 700px){
     .checkout--page {
-        // border: 1px solid red;
+        padding-top: 12rem;
     
         .checkout--steps__div {
             // border: 1px solid red;
@@ -190,7 +205,7 @@
                 gap: 1em;
 
                 hr{
-                    height: 3rem;
+                    height: 8rem;
                 }
             }
 
@@ -220,12 +235,6 @@
     }
 }
 
-@media screen and (max-width: 700px){
-    .checkout--page{
-        padding-top: 12rem;
-    }
-}
-
 @media screen and (max-width: 500px){
     .checkout--page{
 
@@ -235,6 +244,13 @@
 
             .payment--card{
                 width: 350px;
+            }
+
+            .address--div{
+
+                hr{
+                    height: 3rem;
+                }
             }
         }
     }

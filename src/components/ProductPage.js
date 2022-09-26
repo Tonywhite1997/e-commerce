@@ -4,6 +4,7 @@ import Categories from "./Categories";
 import Products from "./Products";
 
 function ProductPage({
+  isOnline,
   navigateCategory,
   isLoading,
   isSearching,
@@ -11,14 +12,30 @@ function ProductPage({
   searchInputRef,
   returnFromSearch,
   currentCategory,
-  setCurrentCategory,
   isSorting,
   products,
   sortArray,
   addToCart,
 }) {
-  if (!isSearching && !isSorting) {
-    setCurrentCategory("All");
+  if (!isOnline) {
+    return (
+      <main
+        className="main"
+        style={{
+          justifyContent: "center",
+          gap: ".1em",
+        }}
+      >
+        <i
+          className="fa-solid fa-triangle-exclamation"
+          style={{ color: "red", fontSize: "2rem" }}
+        ></i>
+        <h1>Connection error!</h1>
+        <p style={{ fontSize: "1.5rem" }}>
+          Please check your internet connection.
+        </p>
+      </main>
+    );
   }
 
   return (

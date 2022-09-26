@@ -139,6 +139,13 @@ button{
                 font-weight: 600;
                 text-decoration: none;
                 font-size: .8rem;
+                transition: all 300ms ease-in;
+
+                &:hover{
+                    color: $logoclr;
+                    border:1px solid $headerclr;
+                    background-color: white;
+                }
             }
         }
     }

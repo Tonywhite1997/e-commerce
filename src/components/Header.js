@@ -53,7 +53,7 @@ function Header({
             Logout
           </Link>
         ) : (
-          <Link className="header--login__link" to="login">
+          <Link className="header--login__link" to="/login">
             Login
           </Link>
         )}

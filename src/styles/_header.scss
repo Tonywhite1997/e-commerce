@@ -86,7 +86,13 @@
         letter-spacing: -0.1px;
         cursor: pointer;
         color: $textclr;
-        text-decoration: none
+        text-decoration: none;
+        transition: all 500ms ease-in-out;
+
+        &:hover{
+            color: $logoclr;
+            text-decoration: underline;
+        }
     }
 
     .logout--cart__div{
@@ -146,24 +152,20 @@
         @include flex(column);
         justify-content: center;
         gap: 1em;
-        padding: 2em 0;
+        padding: 2em 1em;
 
         &--logo{
             width: 100%;
             display: flex;
             align-items: flex-start;
-            padding-left: .5em;
         }
 
         &--searchfield{
-            // border: 1px solid red;
-            width: 90%;
+            width: 100%;
         }
 
         .logout--cart__div{
-            // border: 1px solid red;
             width: 100%;
-            padding: 0 .8em;
             @include flex(row-reverse);
             justify-content: space-between;
         }

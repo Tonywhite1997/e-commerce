@@ -29,6 +29,16 @@
     }
 
     .partnership--div{
+
+        a{
+            color: $logoclr;
+            text-decoration: none;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+
         display: flex;
         width: 100%;
         justify-content: center;
@@ -67,6 +77,7 @@
         .logo--div{
             padding: 0;
             width: 100vw;
+            padding-left: 1em;
         }
     }
 }

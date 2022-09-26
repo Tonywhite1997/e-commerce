@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 
-function LoginPage({ setLoggedIn }) {
+function LoginPage({ setLoggedIn, loggedIn }) {
   const user = {
     email: "tonywhite814.tw@gmail.com",
     password: "123456",
@@ -26,16 +26,23 @@ function LoginPage({ setLoggedIn }) {
 
   function handleLoginDetails() {
     const { email, password } = loginDetails;
+    if (email !== user.email && password !== user.password) {
+      return alert("Please enter correct data.");
+    }
     if (email === user.email && password === user.password) {
       return setLoggedIn(true);
     }
   }
 
   useEffect(() => {
-    if (loginDetails.keepMe) {
+    const { keepMe, email, password } = loginDetails;
+    if (!keepMe && localStorage.getItem("ecommerceLogin")) {
+      return localStorage.removeItem("ecommerceLogin");
+    }
+    if (keepMe && email === user.email && password === user.password) {
       localStorage.setItem("ecommerceLogin", JSON.stringify(loginDetails));
     }
-  }, [handleLoginDetails]);
+  });
 
   return (
     <div className="login--page">
