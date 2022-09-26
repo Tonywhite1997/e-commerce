@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function LoginPage({ setLoggedIn, loggedIn }) {
+function LoginPage({ setLoggedIn }) {
   const user = {
     email: "tonywhite814.tw@gmail.com",
     password: "123456",
